@@ -6,9 +6,20 @@ def pytest_addoption(parser):
     parser.addoption (
         "--language", action = "store", default = "en", help = "Choose language: ar ca cs da de el es fi fr it ko nl pl pt pt-br ro ru sk uk zh-hans en-gb zh-cn ko en"
     )
- 
 
-# Вариант с проверкой введённого яыка
+# Альтернативный вариант вызова браузера простой
+@pytest.fixture(scope="function")
+def browser(request):
+    user_language = request.config.getoption('language')
+    options = Options()
+    options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
+    print("\nstart browser for test..")
+    browser = webdriver.Chrome(options=options)        
+    yield browser
+    print("\nquit browser..")
+    browser.quit()  
+ 
+# Вариант вызова браузера с проверкой введённого яыка
 # @pytest.fixture(scope="function")
 # def browser(request):
 #     languages = "ar ca cs da de el es fi fr it ko nl pl pt pt-br ro ru sk uk zh-hans en-gb zh-cn ko en"
@@ -26,23 +37,9 @@ def pytest_addoption(parser):
 #     yield browser
 #     print("\nQuit browser...")
 #     browser.quit()
- 
 
 
-
-# Альтернативный вариант простой
-@pytest.fixture(scope="function")
-def browser(request):
-    user_language = request.config.getoption('language')
-    options = Options()
-    options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
-    print("\nstart browser for test..")
-    browser = webdriver.Chrome(options=options)        
-    yield browser
-    print("\nquit browser..")
-    browser.quit()  
-
-#Альтернативный вариант с проверкой браузера
+#Альтернативный вариант вызова браузера с проверкой браузера
 # @pytest.fixture(scope="function")
 # def browser(request):
 #     browser_name = request.config.getoption("--browser_name")
