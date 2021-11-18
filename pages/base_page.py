@@ -1,5 +1,5 @@
 class BasePage():
-    def __intit__(self, browser, url):
+    def __init__(self, browser, url):
         self.browser = browser
         self.url = url
     def open(self):
