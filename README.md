@@ -1,2 +1,2 @@
-# Stepik_Final_Project
-Stepik_Final_Project
+# Stepik_Python_Auto_Testing_Final_Project
+Stepik_Python_Auto_Testing_Final_Project
