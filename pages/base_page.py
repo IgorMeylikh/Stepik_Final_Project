@@ -3,6 +3,8 @@ from selenium.common.exceptions import NoSuchElementException
 
 from selenium.common.exceptions import NoAlertPresentException # в начале файла
 
+# from selenium.common.exceptions import ElementNotSelectableException
+
 class BasePage():
     def __init__(self, browser, url, timeout=10):
         self.browser = browser

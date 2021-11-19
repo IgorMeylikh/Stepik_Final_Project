@@ -7,7 +7,9 @@ def test_guest_open_product_page(browser):
     page = ProductPage(browser, link)                           # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
     page.open()  
     page.should_be_add_to_basket_button()
-
+    page.should_be_click_to_button_add_to_basket()
+    page.should_be_switch_to_alert()
+    
 # Тестирование страницы login
 # def test_guest_can_go_to_login_page_and_check_login_url(browser):
 

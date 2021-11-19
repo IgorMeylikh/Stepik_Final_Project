@@ -9,5 +9,5 @@ class LoginPageLocators():
     LOGIN_REGISTER_FORM = (By.CSS_SELECTOR, "#register_form")
 
 class ProductPageLocators():
-    ADD_TO_BASKET_FORM = (By.CSS_SELECTOR, '#add_to_basket_form')
+    ADD_TO_BASKET_BUTTON = (By.CSS_SELECTOR, 'button[data-loading-text="Adding..."]')
     # ADD_TO_BASKET_BUTTON = (ADD_TO_BASKET_FORM.find_element(By.CSS_SELECTOR, 'button[type="submit"]'))
