@@ -7,5 +7,6 @@ from .locators import ProductPageLocators
 
 class ProductPage(BasePage):
     def should_be_add_to_basket_button(self):
-        assert self.is_element_present(*ProductPageLocators.ADD_TO_BASKET_BUTTON), "ADD_TO_BASKET_BUTTON is not presented"    
+        assert self.is_element_present(*ProductPageLocators.ADD_TO_BASKET_FORM), "ADD_TO_BASKET_BUTTON is not presented"   
+        # assert self.is_element_present(*ProductPageLocators.ADD_TO_BASKET_BUTTON), "ADD_TO_BASKET_BUTTON is not presented" 
     
