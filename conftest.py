@@ -8,7 +8,7 @@ def pytest_addoption(parser):
     )
 
 # Альтернативный вариант вызова браузера простой
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="session")
 def browser(request):
     user_language = request.config.getoption('language')
     options = Options()
