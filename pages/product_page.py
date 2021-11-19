@@ -14,9 +14,10 @@ class ProductPage(BasePage):
         self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON).click()
         
     def should_be_switch_to_alert(self):
+        location = "file://D:/Prompt_Alert.HTML>"
+        self.browser.get(location)
         alert = self.browser.switch_to.alert
         print(alert.text)
-        alert.send_keys('Alex')
-        time.sleep(1)
-        alert.dismiss()
-        time.sleep(1)
+        time.sleep(3)
+        alert.send_keys('1111')
+        time.sleep(3)
