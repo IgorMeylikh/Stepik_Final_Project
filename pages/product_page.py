@@ -10,6 +10,10 @@ class ProductPage(BasePage):
         self.should_be_message()
         self.should_be_right_price()
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"        
+
     def should_be_message(self):
         product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
         message = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_MESSAGE).text
@@ -25,3 +29,7 @@ class ProductPage(BasePage):
     def should_not_be_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.ADD_TO_BASKET_MESSAGE), \
             "Success message is presented, but should not be"
+
+    def should_dissapear_of_success_message(self):
+         assert self.is_disappeared(*ProductPageLocators.ADD_TO_BASKET_MESSAGE), \
+            "Success message"
