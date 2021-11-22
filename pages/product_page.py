@@ -1,21 +1,27 @@
-# Подключаем библиотеку By для более красивого и универсального кода
-from selenium.webdriver.common.by import By
-# Импортируем класс BasePage из файла base_page.py
 from .base_page import BasePage
-# Подлючаем файл с локаторами
 from .locators import ProductPageLocators
-import time
 
 class ProductPage(BasePage):
-    def should_be_add_to_basket_button(self):
-        assert self.is_element_present(*ProductPageLocators.ADD_TO_BASKET_BUTTON), "ADD_TO_BASKET_BUTTON is not presented"   
+    def add_to_basket(self):
+        add_to_basket = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON)
+        add_to_basket.click()
 
-    def should_be_click_to_button_add_to_basket(self):
-        self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_BUTTON).click()
-        
-    def should_be_switch_to_alert(self):
-        prompt = self.browser.switch_to.alert
-        prompt.send_keys('My answer')
-        time.sleep(3)
-        prompt.accept()        
-        time.sleep(3)
+    def should_be_add_to_basket(self):
+        self.should_be_message()
+        self.should_be_right_price()
+
+    def should_be_message(self):
+        product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text
+        message = self.browser.find_element(*ProductPageLocators.ADD_TO_BASKET_MESSAGE).text
+        print(product_name, message)
+        assert message == product_name, f"{product_name} is not {message}"
+
+    def should_be_right_price(self):
+        product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
+        basket_price = self.browser.find_element(*ProductPageLocators.BASKET_PRICE).text
+        print(product_price, basket_price)
+        assert product_price == basket_price, f"{product_price} not equal {basket_price}"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.ADD_TO_BASKET_MESSAGE), \
+            "Success message is presented, but should not be"

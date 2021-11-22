@@ -1,23 +1,24 @@
+import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-import pytest
 
-def pytest_addoption(parser):
-    parser.addoption (
-        "--language", action = "store", default = "en", help = "Choose language: ar ca cs da de el es fi fr it ko nl pl pt pt-br ro ru sk uk zh-hans en-gb zh-cn ko en"
-    )
+def pytest_addoption(parser): #парсим язык
+    parser.addoption('--language', action='store', default='en',
+                    help="Choose language")
 
-# Альтернативный вариант вызова браузера простой
-@pytest.fixture(scope="session")
+
+@pytest.fixture(scope="function")
 def browser(request):
-    user_language = request.config.getoption('language')
+    user_language = request.config.getoption("language")
     options = Options()
     options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
+
     print("\nstart browser for test..")
-    browser = webdriver.Chrome(options=options)        
+    browser = webdriver.Chrome(options=options)
+
     yield browser
     print("\nquit browser..")
-    browser.quit()  
+    browser.quit()
  
 # Вариант вызова браузера с проверкой введённого яыка
 # @pytest.fixture(scope="function")
