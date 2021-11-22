@@ -2,9 +2,10 @@ from selenium.webdriver.common.by import By
 
 # Так как это присутствует на каждой странице, то вынесли в локаторы
 class BasePageLocators:
-    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK = (By.ID, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
     BASKET_BUTTON = (By.CSS_SELECTOR, "span[class='btn-group'] a")
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")
 
 class MainPageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
@@ -12,6 +13,10 @@ class MainPageLocators:
 class LoginPageLocators:
     LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
     REGISTER_FORM = (By.ID, "register_form")
+    EMAIL_FIELD = (By.ID, 'id_registration-email')
+    FIRST_PASSWORD_FIELD = (By.ID, 'id_registration-password1')
+    SECOND_PASSWORD_FIELD = (By.ID, 'id_registration-password2')
+    BUTTON_SEND_REGISTER_FORM = (By.CSS_SELECTOR, 'button[name="registration_submit"]')
 
 class ProductPageLocators:
     # ADD_TO_BASKET_BUTTON = (By.XPATH, "//button[contains(@class, 'btn-add-to-basket')]")

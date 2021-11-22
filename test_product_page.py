@@ -1,8 +1,11 @@
 # Импортируем класс ProductPage из файла product_page.py
 from .pages.product_page import ProductPage
+from .pages.login_page import LoginPage
 from .pages.basket_page import BasketPage
+from .pages.base_page import BasePage
 
 import pytest
+import time
 
 # Тестирование страницы product. Открываем страницу
 # pytest -v -s --tb=line --language=en test_product_page.py
@@ -59,3 +62,34 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     basket_page = BasketPage(browser, browser.current_url)
     basket_page.should_be_empty_basket()
     basket_page.should_be_message_empty_basket()
+
+
+@pytest.mark.register_and_auth
+class TestUserAddToBasketFromProductPage():
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/zh-cn/accounts/login/"
+        self.page = LoginPage(browser, link)
+        self.page.open()
+
+        new_user_email = str(time.time()) + "@fakemail.org"
+        new_user_password = str(time.time()) 
+        self.page.register_new_user(new_user_email, new_user_password)
+        
+        self.page.should_be_authorized_user()
+
+    def test_user_cant_see_success_message(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
+        page = ProductPage(browser, link)   
+        page.open()
+        page.should_not_be_success_message()
+        # time.sleep(15)
+
+    def test_user_can_add_product_to_basket(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
+        page = ProductPage(browser, link)
+        page.open()
+        page.add_to_basket()
+        # page.solve_quiz_and_get_code()
+        page.should_be_add_to_basket()
+        # time.sleep(15)
