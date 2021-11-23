@@ -1,4 +1,3 @@
-import pytest
 # Импортируем класс MainPage из файла main_page.py
 from .pages.main_page import MainPage
 # Импортируем класс LoginPage из файла login_page.py
@@ -8,6 +7,7 @@ from .pages.product_page import ProductPage
 # Импортируем класс BasketPage из файла basket_page.py
 from .pages.basket_page import BasketPage
 
+import pytest
 @pytest.mark.login_guest
 class TestLoginFromMainPage():
     # не забываем передать первым аргументом self                       
