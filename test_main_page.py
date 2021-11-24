@@ -9,14 +9,15 @@ from .pages.basket_page import BasketPage
 
 import pytest
 @pytest.mark.login_guest
-class TestLoginFromMainPage():
-    # не забываем передать первым аргументом self                       
-    def test_guest_can_go_to_login_page(self, browser):     
+class TestLoginFromMainPage(MainPage):
+    # не забываем передать первым аргументом self
+
+    def test_guest_can_go_to_login_page(self, browser):
         self.link = "http://selenium1py.pythonanywhere.com"
-        page = MainPage(browser, self.link)                              # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес 
+        page = MainPage(browser, self.link)                              # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
         page.open()                                                 # открываем страницу
         self.login_page = page.go_to_login_page() # выполняем метод страницы — переходим на страницу логина
-        self.login_page = page.should_be_login_link() 
+        self.login_page = page.should_be_login_link()
 
     def test_guest_should_see_login_link(self, browser):
         self.link = "http://selenium1py.pythonanywhere.com/"
