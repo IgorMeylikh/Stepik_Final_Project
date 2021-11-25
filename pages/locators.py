@@ -1,35 +1,31 @@
 from selenium.webdriver.common.by import By
 
-# Так как это присутствует на каждой странице, то вынесли в локаторы
-class BasePageLocators:
-    LOGIN_LINK = (By.ID, "#login_link")
+class BasePageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
-    BASKET_BUTTON = (By.CSS_SELECTOR, "span[class='btn-group'] a")
+    BASKET_BUTTON = (By.CSS_SELECTOR, ".basket-mini a.btn-default")
     USER_ICON = (By.CSS_SELECTOR, ".icon-user")
+    LOGIN_REGISTER_LINK = (By.ID, "login_link")
 
-class MainPageLocators:
+class MainPageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
 
-class LoginPageLocators:
-    LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
-    REGISTER_FORM = (By.ID, "register_form")
-    EMAIL_FIELD = (By.ID, 'id_registration-email')
-    FIRST_PASSWORD_FIELD = (By.ID, 'id_registration-password1')
-    SECOND_PASSWORD_FIELD = (By.ID, 'id_registration-password2')
-    BUTTON_SEND_REGISTER_FORM = (By.CSS_SELECTOR, 'button[name="registration_submit"]')
+class LoginPageLocators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_form")
+    LOGIN_FORM = (By.CSS_SELECTOR, "#login_link")
+    REGISTER_FORM = (By.CSS_SELECTOR, "#register_form")
+    INPUT_FIELD_EMAIL = (By.ID, "id_registration-email")
+    INPUT_FIELD_PASSWORD1 = (By.ID, "id_registration-password1")
+    INPUT_FIELD_PASSWORD2 = (By.ID, "id_registration-password2")
+    BUTTON_REGISTRATION_SUBMIT = (By.NAME, "registration_submit")
 
-class ProductPageLocators:
-    # ADD_TO_BASKET_BUTTON = (By.XPATH, "//button[contains(@class, 'btn-add-to-basket')]")
-    ADD_TO_BASKET_BUTTON = (By.CSS_SELECTOR, 'button[data-loading-text="Adding..."]')
-    PRODUCT_NAME = (By.CSS_SELECTOR, "div h1")
-    ADD_TO_BASKET_MESSAGE = (By.CSS_SELECTOR, "div.alertinner > strong")
-    PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main p[class='price_color']")
-    BASKET_PRICE = (By.CSS_SELECTOR, "div.alert div p strong")
-    SUCCESS_MESSAGE = (By.CSS_SELECTOR, "#messages div:nth-child(1)")    
+class ProductPageLocators():
+    BUTTON_ADD_TO_BASKET = (By.CLASS_NAME, "btn-add-to-basket")
+    PRODUCT_NAME_H1 = (By.CSS_SELECTOR, ".product_main h1")
+    ALERT_SUCCESS = (By.CLASS_NAME, "alertinner")
+    MAIN_PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main .price_color")
+    BASKET = (By.CLASS_NAME, "basket-mini")
 
-class BasketPageLocators:
-    MESSAGE_EMPTY_BASKET = (By.CSS_SELECTOR, "#content_inner")
-    ITEMS_TO_BUY_NOW = (By.CSS_SELECTOR, ".basket-items")
-
-
-    
+class BasketPageLocators():
+    BASKET_ITEMS_BLOCK = (By.CLASS_NAME, "basket-items")
+    BASKET_TEXT = (By.CSS_SELECTOR, "#content_inner p")
